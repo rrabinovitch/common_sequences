@@ -1,6 +1,6 @@
 class TrigramCounter
   def self.top_trigrams(text)
-    normalized_text = text.downcase
+    normalized_text = text.downcase.gsub(/[^a-z0-9\s]*/i, '')
     split_text = normalized_text.split
 
     trigram_tracker = Hash.new(0)
@@ -17,7 +17,6 @@ class TrigramCounter
 
     # sort trigram_tracker by desc values
     sequences_ordered_by_frequency = trigram_tracker.sort_by { |sequence, frequency| -frequency } # is there a more efficient way of doing this? without needing to transform from hash to array and then back to hash?
-    # require "pry"; binding.pry
     # return top 3
     sequences_ordered_by_frequency.first(3).to_h
   end

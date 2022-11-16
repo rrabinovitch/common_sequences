@@ -14,7 +14,7 @@ RSpec.describe TrigramCounter do
     expect(TrigramCounter.top_trigrams(text)).to eq(expected)
   end
 
-  it "returns the same top 3 most common three-word sequences in a .txt file that _does_ have punctuation and newlines" do
+  it "returns the same top 3 most common three-word sequences in a .txt file that _does_ have punctuation, newlines, and mixed capitalization" do
     text = File.read('./lorem_ipsum_fixture.txt')
 
     expected = {
