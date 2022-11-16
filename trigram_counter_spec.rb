@@ -2,14 +2,25 @@ require 'rspec'
 require './trigram_counter'
 
 RSpec.describe TrigramCounter do
-  it "returns top 3 most common three-word sequences" do
-    text = File.read('./lorem_ipsum_fixture.txt')
-    # do i need to close the file?
+  it "returns top 3 most common three-word sequences in a .txt file that does not have any punctuation or newlines to be considered" do
+    text = File.read('./normalized_lorem_ipsum_fixture.txt')
 
     expected = {
-      "ipsum dolor sit"=>5,
-      "dolor sit amet"=>4,
-      "in metus vulputate"=>4
+      "dolor sit amet"=>5,
+      "sit amet consectetur"=>5,
+      "ipsum dolor sit"=>5
+    }
+
+    expect(TrigramCounter.top_trigrams(text)).to eq(expected)
+  end
+
+  it "returns the same top 3 most common three-word sequences in a .txt file that _does_ have punctuation and newlines" do
+    text = File.read('./lorem_ipsum_fixture.txt')
+
+    expected = {
+      "dolor sit amet"=>5,
+      "sit amet consectetur"=>5,
+      "ipsum dolor sit"=>5
     }
 
     expect(TrigramCounter.top_trigrams(text)).to eq(expected)
