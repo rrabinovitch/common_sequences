@@ -19,7 +19,6 @@ class TrigramCounter
         # if yes, add += 1 to that key's value
       trigram_tracker[three_word_sequence] += 1 # not sure if ||= operator might be a better fit here
     end
-    require "pry"; binding.pry
     # sort trigram_tracker by desc values
     sequences_ordered_by_frequency = trigram_tracker.sort_by { |sequence, frequency| -frequency } # is there a more efficient way of doing this? without needing to transform from hash to array and then back to hash?
     # return top 3
