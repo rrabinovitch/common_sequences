@@ -1,6 +1,11 @@
 class TrigramCounter
   def self.top_trigrams(text)
-    normalized_text = text.downcase.gsub(/[^a-z0-9\s]*/i, '').gsub('\n', ' ')
+    normalized_text = text.strip.downcase.gsub(/\R+/, ' ').gsub(/[^\w\s]+|_+/i, '').gsub(/-+/, ' ')
+      # removes leading and trailing whitespace and downcases entire string of text
+      # substitutes any instances of one or more carriage return characters for a space
+      # removes any instances of one or more punctuation characters and underscores
+      # substitutes any instances of one or more dashes for a space
+
     split_text = normalized_text.split
 
     trigram_tracker = Hash.new(0)
@@ -21,3 +26,28 @@ class TrigramCounter
     sequences_ordered_by_frequency.first(3).to_h
   end
 end
+
+
+
+# split out helper methods for normalizing text
+# consider how to account for names that can be read as two words (eg, Mr. Bingley)
+
+
+
+
+### .gsub(/\W+[\s\n\t\r]|[\s\n\t\r]\W+|\W+$|^\W+/, " ")
+# one or more non-word characters followed by a whitespace, newline, tab, or carriage return characters
+# OR
+# any whitespace, newline, tab, or carriage return character followed by one or more non-word characters
+# OR
+# one or more non-word characters at the end of a string
+# OR
+# one or more non-word characters at the start of a string
+# should be replaced by a single space
+
+### .gsub(/\R+/, " ")
+# one or more non-carriage return characters
+# should be replaced by a space
+
+### .gsub(/[^\w\s]+/i, "")
+#
