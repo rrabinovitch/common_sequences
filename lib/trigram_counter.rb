@@ -31,23 +31,3 @@ end
 
 # split out helper methods for normalizing text
 # consider how to account for names that can be read as two words (eg, Mr. Bingley)
-
-
-
-
-### .gsub(/\W+[\s\n\t\r]|[\s\n\t\r]\W+|\W+$|^\W+/, " ")
-# one or more non-word characters followed by a whitespace, newline, tab, or carriage return characters
-# OR
-# any whitespace, newline, tab, or carriage return character followed by one or more non-word characters
-# OR
-# one or more non-word characters at the end of a string
-# OR
-# one or more non-word characters at the start of a string
-# should be replaced by a single space
-
-### .gsub(/\R+/, " ")
-# one or more non-carriage return characters
-# should be replaced by a space
-
-### .gsub(/[^\w\s]+/i, "")
-#
