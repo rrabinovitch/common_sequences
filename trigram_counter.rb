@@ -1,6 +1,6 @@
 class TrigramCounter
   def self.top_trigrams(text)
-    normalized_text = text.downcase.gsub(/[^a-z0-9\s]*/i, '')
+    normalized_text = text.downcase.gsub(/[^a-z0-9\s]*/i, '').gsub('\n', ' ')
     split_text = normalized_text.split
 
     trigram_tracker = Hash.new(0)
