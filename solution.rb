@@ -1,4 +1,4 @@
-require './trigram_counter'
+require './lib/trigram_counter'
 
 text = File.read(ARGV[0])
 top_trigrams = TrigramCounter.top_trigrams(text)
