@@ -1,12 +1,11 @@
+### NEXT
+# refactor out helper methods for text normalization
+# update specs to test helper methods
+# update specs to test for top 100 instead of top 3
+
 class TrigramCounter
   def self.top_trigrams(text)
-    normalized_text = text.strip.downcase.gsub(/\R+/, ' ').gsub(/[^\w\s]+|_+/i, '').gsub(/-+/, ' ')
-      # removes leading and trailing whitespace and downcases entire string of text
-      # substitutes any instances of one or more carriage return characters for a space
-      # removes any instances of one or more punctuation characters and underscores
-      # substitutes any instances of one or more dashes for a space
-
-    split_text = normalized_text.split
+    split_text = normalize_text(text).split
 
     trigram_tracker = Hash.new(0)
 
@@ -22,7 +21,17 @@ class TrigramCounter
     # sort trigram_tracker by desc values
     sequences_ordered_by_frequency = trigram_tracker.sort_by { |sequence, frequency| -frequency } # is there a more efficient way of doing this? without needing to transform from hash to array and then back to hash?
     # return top 3
-    sequences_ordered_by_frequency.first(100).to_h
+    sequences_ordered_by_frequency.first(3).to_h
+  end
+
+  def self.normalize_text(text)
+    # removes leading and trailing whitespace and downcases entire string of text
+    # substitutes any instances of one or more carriage return characters for a space
+    # removes any instances of one or more punctuation characters and underscores
+    # substitutes any instances of one or more dashes for a space
+    text.strip.downcase.gsub(/\R+/, ' ').gsub(/[^\w\s]+|_+/i, '').gsub(/-+/, ' ')
+
+    # does not take into account non-word characters like % if they are sandwhiched in between spaces
   end
 end
 
