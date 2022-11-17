@@ -30,3 +30,4 @@ end
 
 # split out helper methods for normalizing text
 # consider how to account for names that can be read as two words (eg, Mr. Bingley)
+# consider how to account for instances of gutenerge-tm
