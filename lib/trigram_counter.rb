@@ -1,8 +1,8 @@
 class TrigramCounter
   SEQUENCE_COUNT = 100
 
-  def self.top_trigrams(text)
-    split_text = normalize_text(text).split
+  def self.top_trigrams(normalized_text)
+    split_text = normalized_text.split
     trigram_tracker = Hash.new(0)
 
     for index in (0..split_text.length - 3) do
@@ -12,12 +12,6 @@ class TrigramCounter
 
     sequences_ordered_by_frequency = trigram_tracker.sort_by { |sequence, frequency| -frequency }
     sequences_ordered_by_frequency.first(SEQUENCE_COUNT).to_h
-  end
-
-  def self.normalize_text(text)
-    text.strip.downcase.gsub(/\R+/, ' ')
-      .gsub(/[^\w\s]+|_+/i, '')
-      .gsub(/-+/, ' ')
   end
 end
 
