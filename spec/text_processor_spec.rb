@@ -50,5 +50,6 @@ RSpec.describe TextProcessor do
     end
 
     # TODO: consider checking that result of normalizing regular lorem ipsum file produces string that is eq to normalized lorem ipsum file
+    # TODO: consider testing that running pride and prejudice w underscores through normalizer method produces a result that is equal to running the file without underscores through the noramlizer method
   end
 end
