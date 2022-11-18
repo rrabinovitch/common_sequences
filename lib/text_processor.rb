@@ -15,7 +15,8 @@ class TextProcessor
   end
 
   def self.normalize_text(text)
-    text.strip.downcase.gsub(/\R+/, ' ')
+    text.strip.downcase
+      .gsub(/\R+/, ' ')
       .gsub(/[^\w\s]+|_+/i, '')
       .gsub(/-+/, ' ')
   end
