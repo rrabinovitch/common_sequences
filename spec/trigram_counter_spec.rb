@@ -30,4 +30,19 @@ RSpec.describe TrigramCounter do
       expect(TrigramCounter.top_trigrams(normalized_text).count).to eq(41)
     end
   end
+
+  describe "works in conjunction with TextProcessor" do
+    it "returns the same top 100 three-word sequences for the same text with and without underscores" do
+      raw_txt_file_path = 'spec/fixtures/pride_and_prejudice_ch1-3_fixture.txt'
+      no_underscores_txt_file_path = 'spec/fixtures/pride_and_prejudice_ch1-3_no_underscores_fixture.txt'
+
+      raw_txt_processed = TextProcessor.process_text([raw_txt_file_path])
+      no_underscores_txt_processed = TextProcessor.process_text([no_underscores_txt_file_path])
+
+      raw_txt_trigrams = TrigramCounter.top_trigrams(raw_txt_processed)
+      no_underscores_txt_trigrams = TrigramCounter.top_trigrams(no_underscores_txt_processed)
+
+      expect(raw_txt_trigrams).to eq(no_underscores_txt_trigrams)
+    end
+  end
 end

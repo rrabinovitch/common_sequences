@@ -5,17 +5,18 @@ class TextProcessor
   end
 
   def self.read_files(file_paths)
-    # TODO: refactor
     text = String.new
-    # TODO: add file type check
     file_paths.each do |file_path|
-      text << File.read(file_path)
+      if File.extname(file_path) == ".txt"
+        text << File.read(file_path)
+      end
     end
     text
   end
 
   def self.normalize_text(text)
-    text.strip.downcase.gsub(/\R+/, ' ')
+    text.strip.downcase
+      .gsub(/\R+/, ' ')
       .gsub(/[^\w\s]+|_+/i, '')
       .gsub(/-+/, ' ')
   end
