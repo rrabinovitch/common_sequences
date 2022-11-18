@@ -36,8 +36,11 @@ RSpec.describe TextProcessor do
       expect(combined_result.length).to eq(txt_file1_result.length + txt_file2_result.length)
     end
 
-    it "returns an error if passed a non-txt file" do
-      # TODO: fill in
+    it "returns an empty string if passed a non-txt file" do
+      csv_file = './fake_csv_file.csv'
+
+      result = TextProcessor.read_files([csv_file])
+      expect(result).to eq("")
     end
   end
 
