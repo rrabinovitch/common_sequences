@@ -12,18 +12,23 @@ RSpec.describe TextProcessor do
     end
 
     it "reads and normalizes the contents of more than one txt file" do
-      # TODO: fill in
+      txt_file1 = 'spec/fixtures/pride_and_prejudice_ch1-3_fixture.txt'
+      txt_file2 = 'spec/fixtures/pride_and_prejudice_ch4-6_fixture.txt'
+
+      txt_file1_result = TextProcessor.process_text([txt_file1])
+      txt_file2_result = TextProcessor.process_text([txt_file2])
+      combined_result = TextProcessor.process_text([txt_file1, txt_file2])
+
+      expect(combined_result).to eq(txt_file1_result.concat(" ", txt_file2_result))
+      expect(combined_result).to eq(combined_result.downcase)
     end
   end
 
-  # TODO: consider additional testing
   describe "::read_files" do
     it "can read a single txt file" do
       txt_file = './spec/fixtures/lorem_ipsum_fixture.txt'
       result = TextProcessor.read_files([txt_file])
       expect(result).to be_a(String)
-
-      # TODO: expect(result.length).to eq()
     end
 
     it "can read more than one txt file" do
