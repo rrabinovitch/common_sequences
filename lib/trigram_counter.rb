@@ -21,7 +21,7 @@ class TrigramCounter
     # sort trigram_tracker by desc values
     sequences_ordered_by_frequency = trigram_tracker.sort_by { |sequence, frequency| -frequency } # is there a more efficient way of doing this? without needing to transform from hash to array and then back to hash?
     # return top 3
-    sequences_ordered_by_frequency.first(3).to_h
+    sequences_ordered_by_frequency.first(100).to_h
   end
 
   def self.normalize_text(text)
