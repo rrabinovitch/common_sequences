@@ -1,8 +1,6 @@
-# NEXT STEPS:
-### add testing for multiple files
-
 require 'rspec'
 require './lib/trigram_counter'
+require './lib/text_processor'
 
 RSpec.describe TrigramCounter do
   describe "::top_trigrams" do
@@ -29,7 +27,7 @@ RSpec.describe TrigramCounter do
     it "returns a hash of fewer than 100 key-value pairs if there are fewer than 100 three-word sequences in the string" do
       normalized_text = "from planning a move to fixing your car to welcoming a newborn overalls is your partner for managing lifes ups and downs from planning a move welcoming a newborn a newborn overalls is is your partner planning a move a move welcoming planning a move planning a move a newborn overalls welcoming a newborn welcoming a newborn"
 
-      expect(TrigramCounter.top_trigrams(normalized_text)).to eq(41)
+      expect(TrigramCounter.top_trigrams(normalized_text).count).to eq(41)
     end
   end
 end
