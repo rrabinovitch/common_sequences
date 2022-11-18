@@ -52,7 +52,7 @@ RSpec.describe TextProcessor do
   end
 
   describe "::normalize_text" do
-    it "downcases and removes punctuation and line endings from input text" do
+    it "downcases and removes punctuation, line endings, and underscores from input text" do
       text = "   \n From planning a move, to fixing your car, to welcoming a newborn, --Overalls is your partner for managing life’s ups _and_ downs!\n\n"
       normalized_text = "from planning a move to fixing your car to welcoming a newborn overalls is your partner for managing lifes ups and downs"
 
