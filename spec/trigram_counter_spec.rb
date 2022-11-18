@@ -3,7 +3,7 @@ require './lib/trigram_counter'
 
 RSpec.describe TrigramCounter do
   describe  "::normalize_text" do
-    it "downcases and removes punctuation and line endings from input text" do
+    xit "downcases and removes punctuation and line endings from input text" do
       text = "   \n From planning a move, to fixing your car, to welcoming a newborn, --Overalls is your partner for managing life’s ups _and_ downs!\n\n"
       normalized_text = "from planning a move to fixing your car to welcoming a newborn overalls is your partner for managing lifes ups and downs"
 
@@ -11,32 +11,36 @@ RSpec.describe TrigramCounter do
     end
   end
 
-  it "returns top 3 most common three-word sequences in a .txt file that does not have any punctuation or newlines to be considered" do
-    text = File.read('./spec/fixtures/normalized_lorem_ipsum_fixture.txt')
+  describe "::top_trigrams" do
+    it "returns 100 most common three-word sequences in a single .txt file that does not have any punctuation or newlines to be considered" do
+      text = File.read('./spec/fixtures/normalized_lorem_ipsum_fixture.txt')
 
-    expected = {
-      "dolor sit amet"=>5,
-      "sit amet consectetur"=>5,
-      "ipsum dolor sit"=>5
-    }
+      top_3_sequences = {
+        "dolor sit amet"=>5,
+        "sit amet consectetur"=>5,
+        "ipsum dolor sit"=>5
+      }
 
-    expect(TrigramCounter.top_trigrams(text)).to eq(expected)
-  end
+      top_100_sequences = TrigramCounter.top_trigrams(text)
 
-  it "returns the same top 3 most common three-word sequences in a .txt file that _does_ have punctuation, newlines, and mixed capitalization" do
-    text = File.read('./spec/fixtures/lorem_ipsum_fixture.txt')
+      expect(top_100_sequences.count).to eq(100)
+      expect(top_100_sequences.first(3).to_h).to eq(top_3_sequences)
+    end
 
-    expected = {
-      "dolor sit amet"=>5,
-      "sit amet consectetur"=>5,
-      "ipsum dolor sit"=>5
-    }
+    it "returns the same most common three-word sequences in a single .txt file that _does_ have punctuation, newlines, and mixed capitalization" do
+      text = File.read('./spec/fixtures/lorem_ipsum_fixture.txt')
 
-    expect(TrigramCounter.top_trigrams(text)).to eq(expected)
+      top_3_sequences = {
+        "dolor sit amet"=>5,
+        "sit amet consectetur"=>5,
+        "ipsum dolor sit"=>5
+      }
+
+      top_100_sequences = TrigramCounter.top_trigrams(text)
+
+      expect(top_100_sequences.count).to eq(100)
+      expect(top_100_sequences.first(3).to_h).to eq(top_3_sequences)
+      # additional testing to consider: confirm that results are appearing in same order across normalized vs denormalized files
+    end
   end
 end
-
-### future test blocks
-# it catches most frequent sequences regardless of case
-# it catches most frequnent sequences regardless of new lines and punctuation
-# running the lorem ipsum fixture through the normalization script should return the equivalent of the normalized lorem ipsum text
