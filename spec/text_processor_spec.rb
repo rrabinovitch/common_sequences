@@ -1,16 +1,18 @@
-# TODO: make string quote types consistent
-
 require 'rspec'
 require './lib/text_processor'
 
 RSpec.describe TextProcessor do
   describe "::process_text" do
-    it "text" do
+    it "reads and normalizes the contents of a single txt file" do
       txt_file = './spec/fixtures/lorem_ipsum_fixture.txt'
       result = TextProcessor.process_text([txt_file])
 
-      expect(result.class).to eq(String)
+      expect(result).to be_a(String)
       expect(result).to eq(result.downcase)
+    end
+
+    it "reads and normalizes the contents of more than one txt file" do
+      # TODO: fill in
     end
   end
 
@@ -19,8 +21,8 @@ RSpec.describe TextProcessor do
     it "can read a single txt file" do
       txt_file = './spec/fixtures/lorem_ipsum_fixture.txt'
       result = TextProcessor.read_files([txt_file])
-      # TODO: look up class verification rspec method - update across all test blocks
-      expect(result.class).to eq(String)
+      expect(result).to be_a(String)
+
       # TODO: expect(result.length).to eq()
     end
 
@@ -32,7 +34,7 @@ RSpec.describe TextProcessor do
       txt_file2_result = TextProcessor.read_files([txt_file2])
       combined_result = TextProcessor.read_files([txt_file1, txt_file2])
 
-      expect(combined_result.class).to eq(String)
+      expect(combined_result).to be_a(String)
       expect(combined_result.length).to eq(txt_file1_result.length + txt_file2_result.length)
     end
 
