@@ -1,7 +1,8 @@
+require './lib/text_processor'
 require './lib/trigram_counter'
 
-text = File.read(ARGV[0])
-top_trigrams = TrigramCounter.top_trigrams(text)
+normalized_text = TextProcessor.process_text(ARGV)
+top_trigrams = TrigramCounter.top_trigrams(normalized_text)
 top_trigrams.each do |sequence, frequency|
   puts "#{sequence} - #{frequency}"
 end
