@@ -1,6 +1,3 @@
-# TODO: consider testing that running pride and prejudice w underscores through normalizer method produces a result that is equal to running the file without underscores through the noramlizer method
-
-
 require 'rspec'
 require './lib/trigram_counter'
 require './lib/text_processor'
@@ -35,7 +32,7 @@ RSpec.describe TrigramCounter do
   end
 
   describe "works in conjunction with TextProcessor" do
-    it "the same text with and without underscores should produce the same top 100 three-word sequences" do
+    it "returns the same top 100 three-word sequences for the same text with and without underscores" do
       raw_txt_file_path = 'spec/fixtures/pride_and_prejudice_ch1-3_fixture.txt'
       no_underscores_txt_file_path = 'spec/fixtures/pride_and_prejudice_ch1-3_no_underscores_fixture.txt'
 
@@ -46,10 +43,6 @@ RSpec.describe TrigramCounter do
       no_underscores_txt_trigrams = TrigramCounter.top_trigrams(no_underscores_txt_processed)
 
       expect(raw_txt_trigrams).to eq(no_underscores_txt_trigrams)
-    end
-
-    it "" do
-
     end
   end
 end
