@@ -59,7 +59,12 @@ RSpec.describe TextProcessor do
       expect(TextProcessor.normalize_text(text)).to eq(normalized_text)
     end
 
-    # TODO: consider checking that result of normalizing regular lorem ipsum file produces string that is eq to normalized lorem ipsum file
-    # TODO: consider testing that running pride and prejudice w underscores through normalizer method produces a result that is equal to running the file without underscores through the noramlizer method
+    it "results match the contents of a pre-normalized file of the same text" do
+      normalized_lorem_ipsum_text = File.read('./spec/fixtures/normalized_lorem_ipsum_fixture.txt').chomp # removing automatic end-of-file newline
+      raw_lorem_ipsum_text = File.read('spec/fixtures/normalized_lorem_ipsum_fixture.txt')
+
+      raw_lorem_ipsum_results = TextProcessor.normalize_text(raw_lorem_ipsum_text)
+      expect(raw_lorem_ipsum_results).to eq(normalized_lorem_ipsum_text)
+    end
   end
 end
